@@ -1,0 +1,15 @@
+{% extends "platform.html" %}
+{% block navbar %}
+    <form method="post" action="/logout">
+        <button class="button navbar-button pull-right" type="submit"><b>logout</b></button>
+    </form>
+    <form method="post" action="/me">
+        <button class="button navbar-button pull-right" type="submit"><b>me</b></button>
+    </form>
+{% endblock %}
+{% block content %}
+    <form action="/search" method="post">
+        <input type="text" class="form-input-search" placeholder="ex: Software Engineer"/>
+        <button class="button" type="submit"><b>search</b></button>
+    </form>
+{% endblock %}
