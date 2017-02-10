@@ -1,1 +1,2 @@
-from AuthBean import *
+from DevAuthBean import *
+from CompanyAuthBean import *

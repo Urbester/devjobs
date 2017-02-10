@@ -1,0 +1,13 @@
+{% extends "companies/platform.html" %}
+{% block navbar %}
+    <form method="post" action="/c/logout">
+        <button class="button navbar-button pull-right" type="submit"><b>logout</b></button>
+    </form>
+    <form method="post" action="/c/job/form">
+        <button class="button navbar-button pull-right" type="submit"><b>add job</b></button>
+    </form>
+{% endblock %}
+{% block content %}
+    <h2>Your active jobs.</h2>
+
+{% endblock %}

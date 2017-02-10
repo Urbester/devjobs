@@ -73,11 +73,11 @@ ENV/
 .gitignore
 .idea/
 devjobs.pyc
-routes/__init__.pyc
-routes/account.pyc
-routes/auth.pyc
-routes/platform.pyc
-routes/primary.pyc
-routes/search.pyc
+routes_devs/__init__.pyc
+routes_devs/account.pyc
+routes_devs/auth.pyc
+routes_devs/platform.pyc
+routes_devs/primary.pyc
+routes_devs/search.pyc
 static/fonts/
 static/js/

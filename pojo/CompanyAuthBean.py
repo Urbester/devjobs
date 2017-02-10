@@ -1,29 +1,29 @@
-class AuthBean(object):
+class CompanyAuthBean(object):
     def __init__(self):
         pass
 
-    def register_dev(self, email, pwd, filename):
-        from models import Dev
+    def register(self, email, pwd, description):
+        from models import Company
         from devjobs import db
         from hashlib import sha512
 
         try:
-            user = Dev(email, sha512(pwd).hexdigest(), filename)
-            db.session.add(user)
+            c = Company(email, sha512(pwd).hexdigest(), description)
+            db.session.add(c)
             db.session.commit()
             return True
         except Exception as e:
             return False
 
-    def login_dev(self, email, pwd):
-        from models import Dev
+    def login(self, email, pwd):
+        from models import Company
         from devjobs import db, session
         from hashlib import sha512
         from utils import generate_token
 
         try:
             # get user
-            u = Dev.query.filter_by(email=email, pwd=sha512(pwd).hexdigest()).first()
+            u = Company.query.filter_by(email=email, pwd=sha512(pwd).hexdigest()).first()
             if u is None:
                 return False
             u.session_token = unicode(generate_token())

@@ -3,7 +3,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask import session
 
 app = Flask(__name__)
-from routes import *
+from routes_devs import *
+from routes_companies import *
 
 UPLOAD_FOLDER = '/Users/alizardo/PycharmProjects/devjobs/uploads'
 ALLOWED_EXTENSIONS = set(['pdf'])

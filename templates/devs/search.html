@@ -1,10 +1,13 @@
-{% extends "platform.html" %}
+{% extends "devs/platform.html" %}
 {% block navbar %}
     <form method="post" action="/logout">
         <button class="button navbar-button pull-right" type="submit"><b>logout</b></button>
     </form>
-    <form method="post" action="/me">
-        <button class="button navbar-button pull-right" type="submit"><b>me</b></button>
+    <form method="post" action="/settings">
+        <button class="button navbar-button pull-right" type="submit"><b>settings</b></button>
+    </form>
+    <form method="post" action="/dashboard">
+        <button class="button navbar-button pull-right" type="submit"><b>dashboard</b></button>
     </form>
 {% endblock %}
 {% block content %}

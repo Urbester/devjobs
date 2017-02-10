@@ -80,3 +80,11 @@
 .alert {
     width: 200px;
 }
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
