@@ -4,7 +4,7 @@ from markupsafe import Markup
 from werkzeug.utils import secure_filename
 
 from devjobs import app
-from flask import render_template, request
+from flask import render_template, request, session
 
 from utils import allowed_file
 
@@ -34,7 +34,6 @@ def c_login_form():
 @app.route('/c/register', methods=['POST'])
 def c_register_form():
     try:
-
         email = unicode(Markup(request.form['email']).striptags())
         if len(email) < 10 or len(email) > 120:
             return render_template("companies/register.html", alert="Bad email size.", alert_type="warning")
@@ -67,4 +66,5 @@ def c_register():
 
 @app.route('/c/logout', methods=['POST'])
 def c_logout():
+    session.clear()
     return render_template("companies/index.html")

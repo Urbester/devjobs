@@ -2,6 +2,17 @@ class DevAuthBean(object):
     def __init__(self):
         pass
 
+    def verify_token(self, token):
+        from models import Dev
+        try:
+            user = Dev.query.filter_by(session_token=token).first()
+            if user is None:
+                return False
+            else:
+                return True
+        except Exception as e:
+            return False
+
     def register(self, email, pwd, filename):
         from models import Dev
         from devjobs import db

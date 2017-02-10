@@ -34,7 +34,6 @@ def login_form():
 @app.route('/register', methods=['POST'])
 def register_form():
     try:
-
         email = unicode(Markup(request.form['email']).striptags())
         if len(email) < 10 or len(email) > 120:
             return render_template("devs/register.html", alert="Bad email size.", alert_type="warning")

@@ -16,30 +16,16 @@
 </head>
 <body>
 <div class="container">
-    <div class="row navbar">
-        <div class="col-xs-4">
-            <p class="logo-text-size pull-left"><b>dev</b><u>jobs</u></p>
-        </div>
-        <div class="col-xs-8">
-            {% block navbar %} {% endblock %}
-        </div>
-        <div class="col-xs-12 text-center text-center-vertical-third-page-platform">
-            <center>
-                {% if alert %}
-                    <div class="{{ "alert alert-" + alert_type }}">
-                        {{ alert }}
-                    </div>
-                {% endif %}
-                {% block content %}{% endblock %}
-            </center>
+    <div class="row">
+        <div class="col-xs-12 text-center text-center-vertical">
+            <p class="logo-text-size"><b>dev</b><u>jobs</u></p>
+            <p class="stats">Ops!</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 text-center footer-platform">
+        <div class="col-xs-12 text-center footer">
             <hr class="hr"/>
-            {% if not session["premium"] %}
-            <a href="/c/premium"><p><b>Hey</b>, get premium for awesome features.</p></a>
-            {% endif %}
+            <a href="/c/"><p><b>Hey</b>, are you looking for devs?</p></a>
             <p class="footer-email">info@devjobs.xyz</p>
         </div>
     </div>
