@@ -13,4 +13,13 @@
 {% block content %}
     <p class="heading">Last applied jobs.</p>
     <hr class="hr"/>
+    {% if jobs %}
+        {% for i in jobs %}
+            <p class="job">{{ i.title }} | {{ i.salary }} € | {{ i.location }}</p>
+            <form method="post" action="/job/{{ i.id }}">
+                <button type="submit" class="button">show</button>
+            </form>
+            <hr class="hr-job"/>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

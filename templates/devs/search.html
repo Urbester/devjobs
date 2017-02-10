@@ -18,14 +18,16 @@
     {% if results %}
         <hr class="hr"/>
         {% for i in results %}
-            <p class="job">{{ i.title }} | {{ i.salary }} € | {{ i.location }}</p>
-            <form method="post" action="/job/{{ i.id }}">
-                <button type="submit" class="button">show</button>
-                <button type="submit" class="button" form="apply">apply</button>
-            </form>
-            <form method="post" action="/apply/{{ i.id }}" id="apply">
-            </form>
-            <hr class="hr-job"/>
+            {% if dev not in i.dev_applications %}
+                <p class="job">{{ i.title }} | {{ i.salary }} € | {{ i.location }}</p>
+                <form method="post" action="/job/{{ i.id }}">
+                    <button type="submit" class="button">show</button>
+                    <button type="submit" class="button" form="apply">apply</button>
+                </form>
+                <form method="post" action="/apply/{{ i.id }}" id="apply">
+                </form>
+                <hr class="hr-job"/>
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% endblock %}

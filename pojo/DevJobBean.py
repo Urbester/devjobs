@@ -25,7 +25,8 @@ class DevJobBean(object):
         from devjobs import db
         try:
             jobs = Job.query.filter_by(id=id, closed=False).first()
-            self.dev.job_applications.append(jobs)
+            jobs.dev_applications.append(self.dev)
+            db.session.commit()
             return True
         except Exception as e:
             return False
@@ -50,3 +51,6 @@ class DevJobBean(object):
         from models import Dev
         dev = Dev.query.filter_by(session_token=self.token).first()
         return dev
+
+    def get_applied(self):
+        return self.dev.job_applications

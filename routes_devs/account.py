@@ -19,4 +19,7 @@ def dashboard():
     if not bean.verify_token(session["X-Auth-Token"]):
         session.clear()
         return render_template("devs/index.html")
-    return render_template("devs/dashboard.html")
+    from pojo import DevJobBean
+    bean = DevJobBean(session["X-Auth-Token"])
+    jobs = bean.get_applied()
+    return render_template("devs/dashboard.html", jobs=jobs)

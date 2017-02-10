@@ -12,7 +12,7 @@
 {% endblock %}
 {% block content %}
     <p class="heading">{{ job.title }} </p>
-    <p>{{ owner }}</p>
+    <p>{{ owner.email }}</p>
     <hr class="hr"/>
     <p class="job description">{{ job.description }} </p>
     <hr class="hr-job"/>
@@ -27,8 +27,9 @@
         <p class="job">It's an internship.</p>
     {% endif %}
     <hr class="hr-job"/>
-    <form method="post" action="/apply/{{ job.id }}">
-        <button type="submit" class="button">apply</button>
-    </form>
-
+    {% if dev not in job.dev_applications %}
+        <form method="post" action="/apply/{{ job.id }}">
+            <button type="submit" class="button">apply</button>
+        </form>
+    {% endif %}
 {% endblock %}
