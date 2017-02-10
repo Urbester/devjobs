@@ -88,3 +88,12 @@ a {
 a:hover {
     color: black;
 }
+
+.job {
+    font-size: 120%;
+}
+
+.hr-job {
+    width: 5%;
+    border: 1px solid grey;
+}

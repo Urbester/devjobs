@@ -1,0 +1,52 @@
+{% extends "companies/platform.html" %}
+{% block navbar %}
+    <form method="post" action="/c/logout">
+        <button class="button navbar-button pull-right" type="submit"><b>logout</b></button>
+    </form>
+    <form method="post" action="/c/settings">
+        <button class="button navbar-button pull-right" type="submit"><b>settings</b></button>
+    </form>
+    <form method="post" action="/c/dashboard">
+        <button class="button navbar-button pull-right" type="submit"><b>dashboard</b></button>
+    </form>
+{% endblock %}
+{% block content %}
+    <p class="heading">Applications</p>
+    <hr class="hr"/>
+    {% for i in job.dev_applications %}
+        <p class="job">{{ i.email }} </p>
+        <form method="get" action="/c/resume/{{ i.id }}">
+            <button type="submit" class="button">resume</button>
+        </form>
+        <hr class="hr-job"/>
+    {% endfor %}
+    <p class="heading">Edit</p>
+    <hr class="hr"/>
+    <form action="/c/job/add" method="post">
+        <input type="text" class="form-input" value="{{ job.title }}" name="title"/>
+        <textarea name="description" class="form-input"
+                  cols="40" rows="3" style="resize: none;">{{ job.description }}</textarea>
+        <input type="number" class="form-input" value="{{ job.salary }}" name="salary"/>
+        <input type="text" class="form-input" value="{{ job.location }}" name="location"/>
+        <hr class="hr"/>
+        <b>Remote</b><br/>
+        {% if job.remote_work %}
+            <input type="checkbox" name="remote" value="True" checked/>
+        {% else %}
+            <input type="checkbox" name="remote" value="True"/>
+        {% endif %}
+        <hr class="hr"/>
+        <b>Internship</b><br/>
+        {% if job.internship %}
+            <input type="checkbox" name="internship" value="True" checked/>
+        {% else %}
+            <input type="checkbox" name="internship" value="True"/>
+        {% endif %}
+        <hr class="hr"/>
+        <button class="button" type="submit"><b>save</b></button>
+    </form>
+    <hr class="hr"/>
+    <form action="/c/job/remote" method="post">
+        <button class="button" type="submit"><b>remove</b></button>
+    </form>
+{% endblock %}

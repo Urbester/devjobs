@@ -19,7 +19,11 @@ def c_dashboard():
     if not bean.verify_token(session["X-Auth-Token"]):
         session.clear()
         return render_template("companies/index.html")
-    return render_template("companies/dashboard.html")
+
+    from pojo import CompanyJobBean
+    bean = CompanyJobBean(session["X-Auth-Token"])
+    jobs = bean.all()
+    return render_template("companies/dashboard.html", jobs=jobs)
 
 
 @app.route('/c/premium', methods=['GET'])

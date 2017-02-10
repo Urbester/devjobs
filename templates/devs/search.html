@@ -12,7 +12,18 @@
 {% endblock %}
 {% block content %}
     <form action="/search" method="post">
-        <input type="text" class="form-input-search" placeholder="ex: Software Engineer"/>
+        <input type="text" class="form-input-search" name="query" placeholder="ex: Software Engineer"/>
         <button class="button" type="submit"><b>search</b></button>
     </form>
+    {% if results %}
+        <hr class="hr"/>
+        {% for i in results %}
+            <p class="job">{{ i.title }} | {{ i.salary }} € | {{ i.location }}</p>
+            <form method="post" action="/job/{{ i.id }}">
+                <button type="submit" class="button">show</button>
+                <button type="submit" class="button">apply</button>
+            </form>
+            <hr class="hr-job"/>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

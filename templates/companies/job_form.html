@@ -13,4 +13,19 @@
 {% block content %}
     <p class="heading">Add job.</p>
     <hr class="hr"/>
+    <form action="/c/job/add" method="post">
+        <input type="text" class="form-input" placeholder="Web Developer" name="title"/>
+        <textarea name="description" placeholder="We want an Angular Jedi." class="form-input"
+                  cols="40" rows="3" style="resize: none;"></textarea>
+        <input type="number" class="form-input" placeholder="25000 per year" name="salary"/>
+        <input type="text" class="form-input" placeholder="London, UK" name="location"/>
+        <hr class="hr"/>
+        <b>Remote</b><br/>
+        <input type="checkbox" name="remote" value="True"/>
+        <hr class="hr"/>
+        <b>Internship</b><br/>
+        <input type="checkbox" name="internship" value="True"/>
+        <hr class="hr"/>
+        <button class="button" type="submit"><b>publish</b></button>
+    </form>
 {% endblock %}

@@ -12,12 +12,10 @@ ALLOWED_EXTENSIONS = set(['pdf'])
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app, session_options={'autocommit': False})
+db = SQLAlchemy(app)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'devJobsSideProject2017'
-
-db = SQLAlchemy(app)
 
 if __name__ == '__main__':
     try:

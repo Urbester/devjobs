@@ -26,7 +26,10 @@ def c_login_form():
     from pojo import CompanyAuthBean
     bean = CompanyAuthBean()
     if bean.login(email, password):
-        return render_template("companies/dashboard.html")
+        from pojo import CompanyJobBean
+        bean = CompanyJobBean(session["X-Auth-Token"])
+        jobs = bean.all()
+        return render_template("companies/dashboard.html", jobs=jobs)
     else:
         return render_template("companies/login.html", alert="Bad credentials.", alert_type="warning")
 

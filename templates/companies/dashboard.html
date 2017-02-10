@@ -1,6 +1,6 @@
 {% extends "companies/platform.html" %}
 {% block navbar %}
-   <form method="post" action="/c/logout">
+    <form method="post" action="/c/logout">
         <button class="button navbar-button pull-right" type="submit"><b>logout</b></button>
     </form>
     <form method="post" action="/c/settings">
@@ -11,6 +11,15 @@
     </form>
 {% endblock %}
 {% block content %}
-    <p class="heading">Published jobs.</p>
+    <p class="heading">Published jobs</p>
     <hr class="hr"/>
+    {% for i in jobs %}
+        {% if not i.closed %}
+            <p class="job">{{ i.title }} | {{ i.salary }} € | {{ i.location }}</p>
+            <form method="post" action="/c/job/{{ i.id }}">
+                <button type="submit" class="button">show</button>
+            </form>
+            <hr class="hr-job"/>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
