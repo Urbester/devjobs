@@ -10,37 +10,60 @@ from utils import allowed_file
 
 
 @app.route('/login', methods=['POST'])
-def login():
-    return render_template("search.html")
+def login_form():
+    try:
+        email = unicode(Markup(request.form['email']).striptags())
+        if len(email) < 10 or len(email) > 120:
+            return render_template("login.html", alert="Bad email size.", alert_type="warning")
+    except Exception as e:
+        return render_template("login.html", alert="Bad email.", alert_type="warning")
+    try:
+        password = unicode(Markup(request.form['pwd']).striptags())
+        if len(password) < 10 or len(password) > 120:
+            return render_template("login.html", alert="Bad email size.", alert_type="warning")
+    except Exception as e:
+        return render_template("login.html", alert="Bad password.", alert_type="warning")
+    from pojo import AuthBean
+    bean = AuthBean()
+    if bean.login_dev(email, password):
+        return render_template("search.html", alert_type="Welcome back!")
+    else:
+        return render_template("login.html", alert="Bad credentials.", alert_type="warning")
 
 
 @app.route('/register', methods=['POST'])
 def register_form():
     try:
+
         email = unicode(Markup(request.form['email']).striptags())
         if len(email) < 10 or len(email) > 120:
             return render_template("register.html", alert="Bad email size.", alert_type="warning")
     except Exception as e:
-        return render_template("register.html", alert="Bad email.")
+        return render_template("register.html", alert="Bad email.", alert_type="warning")
     try:
         password = unicode(Markup(request.form['pwd']).striptags())
         if len(password) < 10 or len(password) > 120:
-            return render_template("register.html", alert="Bad email size.")
+            return render_template("register.html", alert="Bad email size.", alert_type="warning")
     except Exception as e:
-        return render_template("register.html", alert="Bad password.")
+        return render_template("register.html", alert="Bad password.", alert_type="warning")
     try:
         if 'resume' not in request.files:
-            return render_template("register.html", alert="Bad resume.")
+            return render_template("register.html", alert="Bad resume.", alert_type="warning")
         file = request.files['resume']
         if file.filename == '':
-            return render_template("register.html", alert="Bad resume name.")
+            return render_template("register.html", alert="Bad resume name.", alert_type="warning")
         if file and allowed_file(file.filename):
             filename = secure_filename(email + file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     except Exception as e:
-        return render_template("register.html", alert="Bad resume.")
+        return render_template("register.html", alert="Bad resume.", alert_type="warning")
 
-    return render_template("register.html", alert="Account created.")
+    from pojo import AuthBean
+    bean = AuthBean()
+    if bean.register_dev(email, password, filename):
+        return render_template("register.html", alert="Account created.", alert_type="success")
+    else:
+        return render_template("register.html", alert="Account already registered.", alert_type="warning")
 
 @app.route('/register')
 def register():

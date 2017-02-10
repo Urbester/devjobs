@@ -9,4 +9,4 @@ def index():
 
 @app.route('/enter')
 def enter():
-    return render_template("login.html")
+    return render_template("login.html", alert="", alert_type="")

@@ -25,6 +25,11 @@
         </div>
         <div class="col-xs-12 text-center text-center-vertical-third-page-platform">
             <center>
+                {% if alert %}
+                    <div class="{{ "alert alert-" + alert_type }}">
+                        {{ alert }}
+                    </div>
+                {% endif %}
                 {% block content %}{% endblock %}
             </center>
         </div>

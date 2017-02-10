@@ -20,9 +20,14 @@
         <div class="col-xs-12 text-center text-center-vertical-third-page">
             <p class="logo-text-size"><b>dev</b><u>jobs</u></p>
             <center>
+                {% if alert %}
+                <div class="{{ "alert alert-" + alert_type }}">
+                    {{ alert }}
+                </div>
+                {% endif %}
                 <form action="/login" method="post">
-                    <input type="text" class="form-input" placeholder="your professional email"/>
-                    <input type="text" class="form-input" placeholder="your strong password"/>
+                    <input type="text" class="form-input" name="email" placeholder="your professional email"/>
+                    <input type="password" class="form-input" name="pwd" placeholder="your strong password"/>
                     <button class="button" type="submit"><b>login</b></button>
                 </form>
             </center>
