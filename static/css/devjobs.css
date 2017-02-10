@@ -97,3 +97,7 @@ a:hover {
     width: 5%;
     border: 1px solid grey;
 }
+
+.description {
+    width: 50%;
+}

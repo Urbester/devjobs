@@ -1,0 +1,34 @@
+{% extends "companies/platform.html" %}
+{% block navbar %}
+    <form method="post" action="/logout">
+        <button class="button navbar-button pull-right" type="submit"><b>logout</b></button>
+    </form>
+    <form method="post" action="/settings">
+        <button class="button navbar-button pull-right" type="submit"><b>settings</b></button>
+    </form>
+    <form method="post" action="/dashboard">
+        <button class="button navbar-button pull-right" type="submit"><b>dashboard</b></button>
+    </form>
+{% endblock %}
+{% block content %}
+    <p class="heading">{{ job.title }} </p>
+    <p>{{ owner }}</p>
+    <hr class="hr"/>
+    <p class="job description">{{ job.description }} </p>
+    <hr class="hr-job"/>
+    <p class="job">{{ job.salary }} € per year</p>
+    <hr class="hr-job"/>
+    <p class="job">{{ job.location }} </p>
+    <hr class="hr-job"/>
+    {% if job.remote_work %}
+        <p class="job">You can work remote.</p>
+    {% endif %}
+    {% if job.internship %}
+        <p class="job">It's an internship.</p>
+    {% endif %}
+    <hr class="hr-job"/>
+    <form method="post" action="/apply/{{ job.id }}">
+        <button type="submit" class="button">apply</button>
+    </form>
+
+{% endblock %}

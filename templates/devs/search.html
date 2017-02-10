@@ -21,7 +21,9 @@
             <p class="job">{{ i.title }} | {{ i.salary }} € | {{ i.location }}</p>
             <form method="post" action="/job/{{ i.id }}">
                 <button type="submit" class="button">show</button>
-                <button type="submit" class="button">apply</button>
+                <button type="submit" class="button" form="apply">apply</button>
+            </form>
+            <form method="post" action="/apply/{{ i.id }}" id="apply">
             </form>
             <hr class="hr-job"/>
         {% endfor %}
