@@ -4,8 +4,9 @@ from markupsafe import Markup
 from werkzeug.utils import secure_filename
 
 from devjobs import app
-from flask import render_template, request
+from flask import render_template, request, session
 
+from pojo import DevJobBean
 from utils import allowed_file
 
 
@@ -26,7 +27,9 @@ def login_form():
     from pojo import DevAuthBean
     bean = DevAuthBean()
     if bean.login(email, password):
-        return render_template("devs/dashboard.html")
+        bean = DevJobBean(token=session["X-Auth-Token"])
+        jobs = bean.get_applied()
+        return render_template("devs/dashboard.html", jobs=jobs)
     else:
         return render_template("devs/login.html", alert="Bad credentials.", alert_type="warning")
 

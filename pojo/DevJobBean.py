@@ -6,7 +6,50 @@ class DevJobBean(object):
     def query(self, query):
         from models import Job
         try:
-            jobs = Job.query.filter(Job.title.like("%" + query + "%")).filter_by(closed=False).all()
+            query = query.split(",")
+            remote = False
+            internship = False
+            for i in range(0, len(query)):
+                query[i] = query[i].upper().strip()
+            if "REMOTE" in query:
+                remote = True
+            if "INTERNSHIP" in query:
+                internship = True
+            if remote and internship and len(query) == 4:
+                location = query[1]
+                query = query[0]
+                jobs = Job.query.filter(Job.title.ilike("%" + query + "%")).filter(Job.location.ilike("%" + location + "%"))\
+                    .filter_by(closed=False, remote_work=True, internship=True).all()
+            if remote and internship and len(query) == 3:
+                query = query[0]
+                jobs = Job.query.filter(Job.title.ilike("%" + query + "%"))\
+                    .filter_by(closed=False, remote_work=True, internship=True).all()
+            elif remote and len(query) == 3:
+                location = query[1]
+                query = query[0]
+                jobs = Job.query.filter(Job.title.ilike("%" + query + "%")).filter(Job.location.ilike("%" + location + "%"))\
+                    .filter_by(closed=False, remote_work=True).all()
+            elif internship and len(query) == 3:
+                location = query[1]
+                query = query[0]
+                jobs = Job.query.filter(Job.title.ilike("%" + query + "%")).filter(Job.location.ilike("%" + location + "%"))\
+                    .filter_by(closed=False, internship=True).all()
+            elif len(query) == 2 and internship:
+                query = query[0]
+                jobs = Job.query.filter(Job.title.ilike("%" + query + "%"))\
+                    .filter_by(closed=False, internship=True).all()
+            elif len(query) == 2 and remote:
+                query = query[0]
+                jobs = Job.query.filter(Job.title.ilike("%" + query + "%"))\
+                    .filter_by(closed=False, remote_work=True).all()
+            elif len(query) == 2 and not remote and not internship:
+                location = query[1]
+                query = query[0]
+                jobs = Job.query.filter(Job.title.ilike("%" + query + "%")).filter(Job.location.ilike("%" + location + "%"))\
+                    .filter_by(closed=False).all()
+            else:
+                jobs = Job.query.filter(Job.title.ilike("%" + query[0] + "%"))\
+                    .filter_by(closed=False).all()
             return jobs
         except Exception as e:
             return False
