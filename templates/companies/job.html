@@ -15,7 +15,7 @@
     <hr class="hr"/>
     {% for i in job.dev_applications %}
         <p class="job">{{ i.email }} </p>
-        <form method="get" action="/c/resume/{{ i.id }}">
+        <form method="post" action="/c/resume/{{ i.id }}">
             <button type="submit" class="button">resume</button>
         </form>
         <hr class="hr-job"/>

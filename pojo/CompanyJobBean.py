@@ -34,3 +34,12 @@ class CompanyJobBean(object):
         from models import Company
         company = Company.query.filter_by(session_token=self.token).first()
         return company
+
+    def get_resume(self, id):
+        from models import Dev, Job
+        dev = Dev.query.filter_by(id=id).first()
+        jobs = Job.query.filter_by(owner=self.company.id).all()
+        for i in jobs:
+            if dev in i.dev_applications:
+                return dev.resume_link
+        return False

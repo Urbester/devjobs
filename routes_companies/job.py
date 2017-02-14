@@ -1,4 +1,6 @@
-from flask import render_template, session, request
+import os
+
+from flask import render_template, session, request, send_from_directory
 from markupsafe import Markup
 
 from devjobs import app
@@ -13,6 +15,23 @@ def c_job_form():
         return render_template("companies/index.html")
     return render_template("companies/job_form.html")
 
+
+
+@app.route('/c/resume/<id>', methods=['POST'])
+def c_get_resume(id):
+    from pojo import CompanyAuthBean
+    bean = CompanyAuthBean()
+    if not bean.verify_token(session["X-Auth-Token"]):
+        session.clear()
+        return render_template("companies/index.html")
+
+    from pojo import CompanyJobBean
+    bean = CompanyJobBean(session["X-Auth-Token"])
+    resume_link = bean.get_resume(id)
+    if not resume_link:
+        return render_template("companies/dashboard.html", alert="You don't have permission.", alert_type="warning")
+    uploads = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
+    return send_from_directory(uploads, resume_link)
 
 @app.route('/c/job/<id>', methods=['POST'])
 def c_job_show(id):
