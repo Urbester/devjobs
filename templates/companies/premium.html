@@ -1,6 +1,6 @@
 {% extends "companies/platform.html" %}
 {% block navbar %}
-   <form method="post" action="/c/logout">
+    <form method="post" action="/c/logout">
         <button class="button navbar-button pull-right" type="submit"><b>logout</b></button>
     </form>
     <form method="post" action="/c/settings">
@@ -13,4 +13,17 @@
 {% block content %}
     <p class="heading">Premium</p>
     <hr class="hr"/>
+    <i class="fa fa-search fa-2x"></i>
+    <p class="job">Search developers</p>
+    <hr class="hr-job"/>
+    <i class="fa fa-download fa-2x"></i>
+    <p  class="job">Download all candidates' resumes</p>
+    <hr class="hr-job"/>
+    <i class="fa fa-bullhorn fa-2x"></i>
+    <p class="job">Promote your job</p>
+    <hr class="hr"/>
+    <a href="mailto:info@devjobs.xyz?cc={{ session["email"] }}&amp;subject=Upgrade%20premium&amp;body=Account%20email:%20{{ session["email"] }}"
+       target="_top">
+        <button class="button"><b  class="job">Upgrade now !</b></button>
+    </a>
 {% endblock %}
